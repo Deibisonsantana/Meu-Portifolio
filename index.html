@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deibison Santana — Front-end Developer</title>
+
+  <!-- Google Fonts: troque se quiser -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #F4F4F4;            /* fundo geral */
+      --card-bg: #FFFFFF;       /* cartões / seções */
+      --text: #2E2E2E;          /* texto primário */
+      --muted: #6F6F6F;         /* texto secundário */
+      --accent: #4A90E2;        /* cor de destaque */
+      --accent-boost: #2F77C9;  /* hover/accent escuro */
+      --glass: rgba(255,255,255,0.6);
+      --max-width: 1100px;
+      --radius: 12px;
+      --gap: 1.25rem;
+      --shadow: 0 6px 18px rgba(20,20,20,0.06);
+    }
+
+    /* ---------- Base ---------- */
+    *{box-sizing: border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      font-size:16px; /* base legível (ver fonte) */
+    }
+
+    a{color:var(--accent); text-decoration:none}
+    a:focus{outline:3px solid color-mix(in srgb, var(--accent) 20%, white); outline-offset:3px}
+
+    .container{
+      width:95%;
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:2.25rem 0;
+    }
+
+    /* ---------- Header / Nav ---------- */
+    header{
+      position:sticky;
+      top:0;
+      z-index:30;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(0deg, rgba(255,255,255,0.85), rgba(255,255,255,0.65));
+      border-bottom:1px solid rgba(0,0,0,0.04);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:0.85rem 0;
+    }
+    .brand{
+      display:flex;
+      gap:.75rem;
+      align-items:center;
+      font-weight:700;
+      font-family: "Space Grotesk", "Inter", sans-serif;
+      letter-spacing:0.2px;
+      font-size:1.05rem;
+    }
+    .nav-links{
+      display:flex;
+      gap:1rem;
+      align-items:center;
+    }
+    .nav-links a{
+      padding:0.45rem 0.6rem;
+      border-radius:8px;
+      font-weight:600;
+      color:var(--muted);
+      transition:all .18s ease;
+      font-size:0.95rem;
+    }
+    .nav-links a:hover, .nav-links a:focus{
+      color:var(--text);
+      background:rgba(74,144,226,0.06);
+    }
+
+    /* mobile menu toggle */
+    .menu-btn{
+      display:none;
+      background:transparent;
+      border:0;
+      font-size:1.25rem;
+      cursor:pointer;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      display:flex;
+      gap:2rem;
+      align-items:center;
+      padding:3.5rem 0;
+    }
+    .hero-left{flex:1}
+    .hero h1{
+      margin:0 0 .6rem 0;
+      font-family:"Space Grotesk", sans-serif;
+      font-size:clamp(1.6rem, 3.6vw, 2.6rem);
+      line-height:1.02;
+    }
+    .hero p.lead{
+      margin:0 0 1.2rem 0;
+      color:var(--muted);
+      max-width:58ch;
+      font-size:1.03rem;
+    }
+    .cta{
+      display:inline-flex;
+      gap:.6rem;
+      align-items:center;
+    }
+    .btn{
+      background:var(--accent);
+      color:white;
+      border:0;
+      padding:.6rem .95rem;
+      font-weight:600;
+      border-radius:10px;
+      cursor:pointer;
+      box-shadow: 0 8px 18px rgba(74,144,226,0.12);
+      transition:transform .12s ease, background .12s ease;
+    }
+    .btn:hover{ transform:translateY(-3px); background:var(--accent-boost) }
+    .btn-alt{
+      background:transparent;
+      color:var(--text);
+      border:1px solid rgba(46,46,46,0.06);
+    }
+
+    .hero-right{
+      width:320px;
+      min-width:200px;
+      background:linear-gradient(180deg, rgba(224, 217, 217, 0.8), rgba(221, 214, 214, 0.6));
+      border-radius:var(--radius);
+      padding:1rem;
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .profile{
+      width:100%;
+      height:220px;
+      border-radius:8px;
+      background:linear-gradient(135deg, #E8F0FF 0%, #FFF 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--accent-boost);
+      font-weight:700;
+      font-size:1.25rem;
+    }
+    .profile-img img{
+     width:320px;
+      min-width:220px;
+      border-radius: 8px;
+      object-fit: cover;
+      align-items: center;
+    }
+
+    /* ---------- Sections ---------- */
+    section{
+      margin-top:2.25rem;
+      padding:1.5rem 0;
+    }
+    h2.section-title{
+      margin:0 0 1rem 0;
+      font-size:1.25rem;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+    }
+    .muted{color:var(--muted)}
+
+    /* Projects grid */
+    .projects-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:var(--gap);
+      align-items:start;
+    }
+    .project{
+      background:var(--card-bg);
+      border-radius:12px;
+      padding:1rem;
+      box-shadow:var(--shadow);
+      transition:transform .14s ease, box-shadow .14s ease;
+      display:flex;
+      flex-direction:column;
+      gap:.8rem;
+      align-items: center;
+    }
+    .project:hover{ transform:translateY(-6px); box-shadow:0 12px 28px rgba(20,20,20,0.08) }
+   
+
+  .project img {
+  width: 40%;
+  height: 190px;
+  overflow: hidden;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit:cover;
+  padding: auto;
+}
+    .project .techs{ display:flex; gap:.5rem; flex-wrap:wrap; font-size:0.85rem; color:var(--muted) }
+
+    .project .actions{
+      margin-top:auto;
+      display:flex;
+      gap:.6rem;
+    }
+    .chip{
+      background:rgba(46,46,46,0.04);
+      padding:.3rem .55rem;
+      border-radius:8px;
+      font-size:.82rem;
+    }
+
+    /* Skills area */
+    .skills{
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .skill{
+      background:var(--card-bg);
+      padding:.55rem .7rem;
+      border-radius:10px;
+      box-shadow:var(--shadow);
+      font-weight:600;
+      font-size:.9rem;
+    }
+
+    /* Contact */
+    .contact-card{
+      background:linear-gradient(180deg, #fff, #fbfdff);
+      border-radius:12px;
+      padding:1rem;
+      box-shadow:var(--shadow);
+    }
+    .contact-links{display:flex; gap:1rem; flex-wrap:wrap}
+
+    footer{
+      margin-top:2.5rem;
+      padding:1.5rem 0;
+      text-align:center;
+      color:var(--muted);
+      font-size:.95rem;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:900px){
+      .hero{flex-direction:column; align-items:flex-start}
+      .hero-right{width:100%}
+      .nav-links{display:none}
+      .menu-btn{display:inline-block}
+    }
+    @media (min-width:901px){
+      .menu-btn{display:none}
+    }
+
+    /* accessible focus styles */
+    :focus{outline: 3px solid rgba(74,144,226,0.18); outline-offset:3px}
+  </style>
+</head>
+<body>
+
+  <!-- Header / Nav -->
+  <header>
+    <div class="container nav" role="navigation" aria-label="Main Navigation">
+      <div class="brand" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" style="border-radius:8px;background:var(--card-bg);padding:6px;">
+          <rect x="0" y="0" width="24" height="24" rx="6" fill="#4A90E2" />
+          <text x="12" y="16" text-anchor="middle" font-size="11" font-family="Inter" fill="#fff" font-weight="700">DS</text>
+        </svg>
+        <span>Deibison santana</span>
+      </div>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#sobre">Sobre</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#skills">Habilidades</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-controls="navLinks" aria-expanded="false" aria-label="Abrir menu">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container">
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-left">
+        <h1>Olá — eu sou <span style="color:var(--accent)">Deibison Santana</span></h1>
+        <p class="lead">Front-end Developer focado em interfaces limpas, performáticas e acessíveis. Construo experiências que tornam produtos mais fáceis de usar e manter.</p>
+        <div class="cta">
+          <a class="btn" href="#projetos">Ver Projetos</a>
+          <a class="btn btn-alt" href="https://wa.me/5581998249481?text=Olá,%20gostaria%20de%20mais%20informações!
+" style="padding:.5rem .8rem;">Contato</a>
+        </div>
+      </div>
+
+      <div class="hero-right" aria-hidden="true">
+        <div class="profile-img"><img src="img/eu2.jpg" alt="eu"></div>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre" aria-labelledby="sobreTitle">
+      <h2 class="section-title" id="sobreTitle">Sobre mim</h2>
+      <p class="muted">Sou um desenvolvedor front-end iniciando carreira; gosto de transformar designs em interfaces funcionais e intuitivas. Trabalho com HTML, CSS, JavaScript e frameworks modernos. Busco projetos que valorizem usabilidade e desempenho.</p>
+      <div style="margin-top:1rem; display:flex; gap:1rem; flex-wrap:wrap;">
+        <div class="chip">Disponível para freelance</div>
+        <div class="chip">Aberto a oportunidades</div>
+        <div class="chip">Residente: Jaboatão dos Guararapes-PE</div>
+      </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos" aria-labelledby="projetosTitle">
+      <h2 class="section-title" id="projetosTitle">Projetos</h2>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="project" aria-labelledby="p1">
+          <img class="project-image" src="img/wecare2.jpg" alt="Screenshot do Projeto 1">
+          <h3 id="p1">Projeto 1 — We Care</h3>
+          <p class="muted">Clonagem responsiva de landing page com foco em layout leves. Feito com HTML/CSS e com Responsividade.</p>
+          <div class="techs">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+              </div>
+          <div class="actions">
+            <a class="btn" href="#" target="_blank" rel="noopener">Demo</a>
+            <a class="btn btn-alt" href="https://github.com/Deibisonsantana/We-Care.git" target="_blank" rel="noopener">Código</a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project" aria-labelledby="p2">
+          <img src="https://via.placeholder.com/640x360.png?text=Projeto+2" alt="Screenshot do Projeto 2">
+          <h3 id="p2">Projeto 2 — App To-Do</h3>
+          <p class="muted">App CRUD com armazenamento local e atenção em acessibilidade e teclado.</p>
+          <div class="techs">
+            <span class="chip">React</span>
+            <span class="chip">Vite</span>
+            <span class="chip">LocalStorage</span>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#" target="_blank" rel="noopener">Demo</a>
+            <a class="btn btn-alt" href="#" target="_blank" rel="noopener">Código</a>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project" aria-labelledby="p3">
+          <img src="https://via.placeholder.com/640x360.png?text=Projeto+3" alt="Screenshot do Projeto 3">
+          <h3 id="p3">Projeto 3 — Dashboard</h3>
+          <p class="muted">Painel de dados com visual limpo, gráfico e responsividade.</p>
+          <div class="techs">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS Grid</span>
+            <span class="chip">Chart.js</span>
+          </div>
+          <div class="actions">
+            <a class="btn" href="#" target="_blank" rel="noopener">Demo</a>
+            <a class="btn btn-alt" href="#" target="_blank" rel="noopener">Código</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" aria-labelledby="skillsTitle">
+      <h2 class="section-title" id="skillsTitle">Habilidades</h2>
+      <div class="skills" aria-hidden="false">
+        <span class="skill">HTML</span>
+        <span class="skill">CSS</span>
+        <span class="skill">JavaScript</span>
+        <span class="skill">React</span>
+        <span class="skill">Git</span>
+        <span class="skill">Responsive Design</span>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" aria-labelledby="contatoTitle">
+      <h2 class="section-title" id="contatoTitle">Contato</h2>
+      <div style="display:grid; grid-template-columns:1fr; gap:var(--gap);">
+        <div class="contact-card">
+          <p class="muted">Quer trabalhar comigo? Me envie uma mensagem — respondo rápido.</p>
+          <div style="margin-top:1rem" class="contact-links">
+            <a class="btn" href="mailto:deibesonsantana@gmail.com">Enviar e-mail</a>
+            <a class="btn btn-alt" href="https://github.com/Deibisonsantana" target="_blank" rel="noopener">GitHub</a>
+            <a class="btn btn-alt" href="https://www.linkedin.com/in/deibison-santana-0351b3270/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://wa.me/5581998249481?text=Olá,%20gostaria%20de%20mais%20informações!" target="_blank" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="60">
+</a>
+
+
+        </div>
+        </div>
+
+        <div style="font-size:.95rem; color:var(--muted)">
+          <p>Ou use o e-mail: <strong>deibesonsantana@gmail.com</strong></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>© <span id="year"></span> Deibison Santana — Front-end Developer</div>
+    </div>
+  </footer>
+
+  <script>
+    // small scripts: mobile menu toggle + set year
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', String(!expanded));
+      if(navLinks.style.display === 'flex'){
+        navLinks.style.display = 'none';
+      } else {
+        navLinks.style.display = 'flex';
+        navLinks.style.flexDirection = 'column';
+        navLinks.style.background = 'rgba(255,255,255,0.98)';
+        navLinks.style.position = 'absolute';
+        navLinks.style.right = '1.25rem';
+        navLinks.style.top = '62px';
+        navLinks.style.padding = '0.6rem';
+        navLinks.style.borderRadius = '8px';
+        navLinks.style.boxShadow = 'var(--shadow)';
+      }
+    });
+
+    // close mobile nav on link click (small UX nicety)
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+      if(window.innerWidth <= 900){
+        navLinks.style.display = 'none';
+        menuBtn.setAttribute('aria-expanded','false');
+      }
+    }));
+
+    // set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
